@@ -39,6 +39,12 @@ ngModule.controller('AppCtrl', ['$scope', '$mdSidenav', '$timeout', function($sc
         return str.join("&");
     }
 
+    vm.reset = function() {
+        "use strict";
+
+        vm.params = {};
+        vm.inputUrl = '';
+    }
 
     vm.create = function() {
         "use strict";

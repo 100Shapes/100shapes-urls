@@ -31,7 +31,7 @@
 
     <div layout="column" flex id="content">
         <md-content layout="column" flex class="md-padding">
-            <form name="urlForm">
+            <form name="urlForm" novalidate>
 
                 <md-input-container>
                     <label>URL to share</label>
@@ -61,6 +61,7 @@
                     <label>What are you posting this URL on?</label>
                     <input type="text"
                            ng-model="vm.params.medium"
+                           name="medium"
                            required/>
 
                 </md-input-container>
@@ -70,16 +71,24 @@
                     <label>Source</label>
                     <input type="text"
                            ng-model="vm.params.source"
+                           name="source"
                            required/>
                 </md-input-container>
 
 
-                <md-button ng-click="vm.create()"
-                           ng-disabled="urlForm.$invalid"
-                           class="md-raised md-primary">
+                <div layout>
+                    <md-button ng-click="vm.create()"
+                               ng-disabled="urlForm.$invalid"
+                               class="md-raised md-primary">
 
-                    Create
-                </md-button>
+                        Create
+                    </md-button>
+
+                    <md-button ng-click="vm.reset()">
+                        Reset
+                    </md-button>
+                </div>
+
 
 
             </form>
