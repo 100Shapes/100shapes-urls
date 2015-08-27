@@ -44,7 +44,7 @@ ngModule.controller('AppCtrl', ['$scope', '$mdSidenav', '$timeout', function($sc
         "use strict";
 
         $timeout(function() {
-            vm.output = vm.inputUrl + '?' + vm.serialize(vm.params);
+            vm.output = 'http://100s.co/e7sd0d8?' + vm.serialize(vm.params);
         }, 500)
 
     };

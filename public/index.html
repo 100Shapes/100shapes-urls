@@ -38,11 +38,13 @@
                     <input ng-model="vm.inputUrl"
                            required
                            name="url"
-                           type="url">
+                           type="url"
+                           ng-pattern="/http://www.100shapes.com/*/">
 
                     <div ng-messages="urlForm.url.$error"
                          ng-if="urlForm.url.$dirty">
                         <div ng-message="required">Whoa there. You need to fill me in.</div>
+                        <div ng-message="pattern">Not a 100 Shapes domain</div>
                     </div>
                 </md-input-container>
 
