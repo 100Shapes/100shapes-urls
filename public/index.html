@@ -34,31 +34,57 @@
             <form name="urlForm">
 
                 <md-input-container>
-                    <label>URL</label>
-                    <input ng-model="vm.url.input"
+                    <label>URL to share</label>
+                    <input ng-model="vm.inputUrl"
                            required
                            name="url"
                            type="url">
 
                     <div ng-messages="urlForm.url.$error"
-                         ng-if="urlForm.$dirty">
+                         ng-if="urlForm.url.$dirty">
                         <div ng-message="required">Whoa there. You need to fill me in.</div>
                     </div>
                 </md-input-container>
 
+
                 <md-input-container>
-                    <label>State</label>
-                    <md-select ng-model="vm.ctrl.userState" aria-label="Campaign select">
-                        <md-option ng-repeat="state in vm.states" value="{{state.abbrev}}">{{state.abbrev}}</md-option>
+                    <label>Campaign</label>
+                    <md-select ng-model="vm.params.campaign" aria-label="Campaign select">
+                        <md-option value="{{  campaign.value }}" ng-repeat="campaign in vm.options.campaigns">{{ campaign.label }}</md-option>
                     </md-select>
                 </md-input-container>
 
 
+                <md-input-container>
+                    <label>What are you posting this URL on?</label>
+                    <input type="text"
+                           ng-model="vm.params.medium"
+                           required/>
+
+                </md-input-container>
+
+
+                <md-input-container>
+                    <label>Source</label>
+                    <input type="text"
+                           ng-model="vm.params.source"
+                           required/>
+                </md-input-container>
+
+
+                <md-button ng-click="vm.create()"
+                           ng-disabled="urlForm.$invalid"
+                           class="md-raised md-primary">
+
+                    Create
+                </md-button>
+
+
             </form>
 
-            <md-input-container>
+            <md-input-container ng-if="vm.output">
                 <label>Output</label>
-                <input ng-model="vm.url.input"
+                <input ng-model="vm.output"
                        name="output"
                        type="url">
             </md-input-container>
@@ -70,7 +96,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.1/angular-material.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-messages.js"></script>
 <script src="./main.js"></script>
 </html>

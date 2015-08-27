@@ -6,7 +6,7 @@ var ngModule = angular.module('app', [
 ]);
 
 
-ngModule.controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav){
+ngModule.controller('AppCtrl', ['$scope', '$mdSidenav', '$timeout', function($scope, $mdSidenav, $timeout){
 
     var vm = this;
 
@@ -14,7 +14,8 @@ ngModule.controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSide
         $mdSidenav(menuId).toggle();
     };
 
-    vm.url = {};
+    vm.inputUrl = '';
+    vm.params = {};
 
     vm.options = {
         campaigns: [
@@ -29,8 +30,23 @@ ngModule.controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSide
         ]
     };
 
-    vm.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
-    'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
-    'WY').split(' ').map(function (state) { return { abbrev: state }; });
+    vm.serialize = function(params) {
+        var str = [];
+        for(var p in params)
+            if (params.hasOwnProperty(p)) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(params[p].toLowerCase().replace(/ /g,'')));
+            }
+        return str.join("&");
+    }
+
+
+    vm.create = function() {
+        "use strict";
+
+        $timeout(function() {
+            vm.output = vm.inputUrl + '?' + vm.serialize(vm.params);
+        }, 500)
+
+    };
 
 }]);
