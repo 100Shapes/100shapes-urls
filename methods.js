@@ -2,19 +2,14 @@ var Firebase = require("firebase");
 
 module.exports = function(server) {
 
-    server.app.ohs_firebase = new Firebase("https://100-shapes-urls.firebaseio.com/");
+    server.app.ohs_firebase = new Firebase("https://ohs-url-shortener.firebaseio.com");
 
-    server.method('addUrl', function(url, next) {
-        console.log(url)
-        server.app.ohs_firebase.set(url);
-        return next(null, url);
-    });
+    server.method('translateUrl', function(short_url, next) {
+        server.app.ohs_firebase.child("url").on("value", function(snapshot) {
 
-    server.method('getUrls', function(next) {
-        server.app.ohs_firebase.child("location/city").on("value", function(snapshot) {
-            console.log(snapshot.val());
-            return next(null, snapshot);
+
         });
-        return next('No items found');
+        long_url="http://this is wrong";
+        return next(null, long_url);
     });
 };

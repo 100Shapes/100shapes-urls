@@ -7,45 +7,17 @@ module.exports = function(server) {
 
     server.route({
         method: 'GET',
-        path: '/urls',
+        path: '/l/{short_url?}',
         handler: function(request, reply) {
-            server.methods.getUrls(function(err, urls) {
+            var short_url = request.params.short_url ? encodeURIComponent(request.params.short_url) : 'none';
+
+            server.methods.translateUrl(short_url, function(err, long_url) {
                 if (err) {
                     reply(err).code(404);
                 } else {
-                    reply(urls).code(200);
+                    reply.redirect(long_url);
                 }
             })
-        }
-    });
-
-    server.route({
-        method: 'POST',
-        path: '/urls',
-        handler: function (request, reply) {
-            var url = {
-                web_address: request.payload.web_address,
-                source: request.payload.source,
-                medium:request.payload.medium,
-                name:request.payload.name
-            };
-            server.methods.addUrl(url, function(err, new_url) {
-                if (err) {
-                    reply(err).code(404);
-                } else {
-                    reply(new_url).code(200);
-                }
-            });
-        },
-        config: {
-            validate: {
-                payload: {
-                    web_address: Joi.string().required().min(3),
-                    source: Joi.string().required().min(3),
-                    medium: Joi.string(),
-                    name: Joi.string()
-                }
-            }
         }
     });
 

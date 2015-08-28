@@ -1,13 +1,14 @@
 
-
 var ngModule = angular.module('app', [
     'ngMaterial',
-    'ngMessages'
+    'ngMessages',
+    'firebase'
 ]);
 
 
-ngModule.controller('AppCtrl', ['$scope', '$mdSidenav', '$timeout', function($scope, $mdSidenav, $timeout){
+ngModule.controller('AppCtrl', ['$scope', '$mdSidenav', '$timeout', function($scope, $mdSidenav, $timeout, $firebaseObject){
 
+    // var ref = new Firebase("https://ohs-url-shortener.firebaseio.com");
     var vm = this;
 
     vm.toggleSidenav = function(menuId) {
