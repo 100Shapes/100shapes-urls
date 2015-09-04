@@ -15,6 +15,8 @@ module.exports = function(server) {
                 reply.file('public/index.html');
             } else if (url == 'bundle.js') {
                 reply.file('public/bundle.js');
+            } else if (url == 'favicon.ico') {
+                reply.file('public/favicon.ico');
             } else {
                 server.methods.translateUrl(url, function(err, long_url) {
                     if (err) {

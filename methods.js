@@ -4,6 +4,8 @@ module.exports = function(server) {
 
     server.method('translateUrl', function(short_url, next) {
 
+        console.log (short_url);
+
         var ref = new Firebase("https://ohs-url-shortener.firebaseio.com/short/" + short_url).once('value', function(snapshot) {
             long_url=snapshot.val();
             return next(null, long_url);
